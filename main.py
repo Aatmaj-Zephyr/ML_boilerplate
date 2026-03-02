@@ -3,7 +3,7 @@ import argparse
 
 import petname
 
-from logger import setup_logger
+from logger import setup_logger, log
 from trainer import train
 
 parser = argparse.ArgumentParser()
@@ -18,4 +18,5 @@ run_id = petname.generate(2)
 setup_logger(debug,run_id)
 
 if __name__ == "__main__":
+    log.info(f"Starting training with run_id: <red>{run_id}</red>")
     train()

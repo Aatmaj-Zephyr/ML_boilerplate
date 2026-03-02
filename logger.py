@@ -3,8 +3,7 @@ import sys
 from loguru import logger
 from config import config
 
-log = logger
-
+log = logger.opt(colors=True)
 
 def setup_logger(debug_mode: bool, run_id: str) -> None:
     """
@@ -17,7 +16,7 @@ def setup_logger(debug_mode: bool, run_id: str) -> None:
 
     LOG_FORMAT = (
         f"[{run_id}] "
-        "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+        "<cyan>{time:YYYY-MM-DD HH:mm:ss}</cyan> | "
         "<level>{level}</level> | "
         "<cyan>{name}</cyan>:<cyan>{line}</cyan> - "
         "{message}"
@@ -30,7 +29,8 @@ def setup_logger(debug_mode: bool, run_id: str) -> None:
         sys.stdout,
         level=level,
         format=LOG_FORMAT,
-        colorize=True
+        colorize=True,
+        
     )
 
     # File handler
@@ -41,3 +41,4 @@ def setup_logger(debug_mode: bool, run_id: str) -> None:
         rotation="10 MB",
         colorize=False
     )
+    

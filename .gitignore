@@ -7,6 +7,6 @@
 *.meta
 data_*
 *_batch*
-.vscode
 .trunk
 venv
+old_outputs
