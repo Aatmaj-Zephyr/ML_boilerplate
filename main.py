@@ -1,12 +1,11 @@
 """Training script for ML model."""
 import argparse
-import time
 
-import petname
-from helpers.config import load_config,config
-from helpers.logger import setup_logger, log
-from trainer import train
+from helpers.config import config,load_config
+from helpers.logger import log,setup_logger
 from helpers.telemetry_writer import telemetry_writer
+
+from trainer import train
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--mode", help="Run mode (debug/prod)",
@@ -18,7 +17,7 @@ debug = args.mode == "debug"
 
 setup_logger()
 telemetry_writer.setup_writer(
-    fieldnames=["epoch", "train_loss", "val_loss"] # modify this as needed
+    fieldnames=["epoch", "train_loss", "val_loss"]  # modify this as needed
 )
 
 

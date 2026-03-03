@@ -1,9 +1,11 @@
-"""File to load config from config.toml and provide a global config object. No need to modify this file"""
-import petname
+"""File to load config from config.toml and provide a global config object. No need to modify this file."""
 
 import time
 import tomllib
 from types import SimpleNamespace
+
+import petname
+
 
 with open("./config.toml", "rb") as f:
     data = tomllib.load(f)
@@ -22,13 +24,12 @@ config.runtime = SimpleNamespace(
 )
 
 
-def load_config(mode: str):
+def load_config(mode: str) -> None:
     """Load config with debug or prod mode.
 
     Args:
         mode (str): mode to load config for (debug/prod)
     """
-
     config.runtime.RUN_ID = petname.generate(2)
     config.runtime.START_TIME = time.time()
     mode_overrides = data.get(mode, {})

@@ -1,4 +1,4 @@
-"""Training code goes here"""
+"""Training code goes here."""
 
 import time
 
@@ -19,4 +19,5 @@ def train() -> None:
             execution_time = time.time() - config.runtime.START_TIME
             execution_time_formatted = time.strftime(
                 "%H:%M:%S", time.gmtime(execution_time))
-            log.info(f"Epoch: {epoch}, Elapsed time: {execution_time_formatted}")
+            log.info(
+                f"Epoch: {epoch}, Elapsed time: {execution_time_formatted}")
