@@ -1,5 +1,5 @@
 """File to setup a simple telemetry writer that logs metrics to a CSV file. No need to modify this file."""
-from typing import Any
+from typing import Any, TextIO
 import csv
 import os
 import time
@@ -9,6 +9,12 @@ from helpers.config import config
 
 class TelemetryWriter:
     """Class to write telemetry to some file."""
+
+    def __init__(self) -> None:
+        """Declare the attributes of the class."""
+        self.writer: csv.DictWriter
+        self.file: TextIO
+        self.filepath: str
 
     def setup_writer(self, fieldnames: list[str], directory: str = "./telemetry_logs") -> None:
         """Set the writer attributes.
@@ -23,7 +29,10 @@ class TelemetryWriter:
         self.filepath = os.path.join(directory, f"{config.runtime.RUN_ID}.csv")
         file_exists = os.path.isfile(self.filepath)
 
-        self.file = open(self.filepath, "a", newline="")
+        # In our case, we're intentionally keeping the file open for repeated writes — which is actually more efficient
+        # than opening and closing it every time we log. This is why "with" keyword is not used. The current design is good for performance.
+        # trunk-ignore(pylint/R1732)
+        self.file = open(self.filepath, "a", newline="", encoding="utf-8")
         self.writer = csv.DictWriter(
             self.file,
             fieldnames=["timestamp"] + fieldnames
