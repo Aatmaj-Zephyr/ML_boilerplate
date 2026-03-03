@@ -1,2 +1,10 @@
 [default]
-debug_log_file="./debug_logs/main.log"
+DEBUG_LOG_FILE_PATH="./debug_logs/main.log"
+
+[debug]
+IS_DEBUG = true
+TELEMETRY_INTERVAL = 100
+
+[prod]
+IS_DEBUG = false
+TELEMETRY_INTERVAL = 1000

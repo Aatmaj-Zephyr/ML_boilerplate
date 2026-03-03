@@ -5,11 +5,10 @@ from config import config
 
 log = logger.opt(colors=True)
 
-def setup_logger(debug_mode: bool, run_id: str) -> None:
+def setup_logger(run_id: str) -> None:
     """
     Configure logger using explicit config object.
     Args:
-    debug_mode (bool): Whether to set log level to DEBUG or INFO.
     run_id (str): Unique identifier for the current run, used in log formatting.
     """
     logger.remove()
@@ -22,7 +21,7 @@ def setup_logger(debug_mode: bool, run_id: str) -> None:
         "{message}"
     )
 
-    level = "DEBUG" if debug_mode else "INFO"
+    level = "DEBUG" if config.IS_DEBUG else "INFO"
 
     # Console handler
     logger.add(
@@ -35,7 +34,7 @@ def setup_logger(debug_mode: bool, run_id: str) -> None:
 
     # File handler
     logger.add(
-        config.debug_log_file,
+        config.DEBUG_LOG_FILE_PATH,
         level=level,
         format=LOG_FORMAT,
         rotation="10 MB",
