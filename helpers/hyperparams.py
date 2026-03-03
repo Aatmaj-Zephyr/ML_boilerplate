@@ -1,4 +1,4 @@
-"""Load hyperparameters from. toml file."""
+"""Load hyperparameters from the toml file. No need to modify this file."""
 import tomllib
 from types import SimpleNamespace
 

@@ -1,7 +1,7 @@
-"""Setup logger for the project."""
+"""Setup logger for the project. No need to modify this file."""
 import sys
 from loguru import logger
-from config import config
+from helpers.config import config
 
 log = logger.opt(colors=True)
 

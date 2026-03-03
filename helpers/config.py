@@ -1,4 +1,4 @@
-# config.py
+"""File to load config from config.toml and provide a global config object. No need to modify this file"""
 import tomllib
 from types import SimpleNamespace
 

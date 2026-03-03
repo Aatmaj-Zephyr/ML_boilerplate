@@ -46,9 +46,9 @@ echo "Upgrading pip..."
 pip install --upgrade pip
 
 # Install requirements if file exists
-if [ -f "requirements.txt" ]; then
+if [ -f "./setup/requirements.txt" ]; then
     echo "Installing dependencies from requirements.txt..."
-    pip install -r requirements.txt
+    pip install -r ./setup/requirements.txt
 else
     echo "No requirements.txt found, skipping dependency installation."
 fi
