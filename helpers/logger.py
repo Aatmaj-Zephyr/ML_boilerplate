@@ -1,20 +1,21 @@
 """Setup logger for the project. No need to modify this file."""
 import sys
 from loguru import logger
+
 from helpers.config import config
 
 log = logger.opt(colors=True)
 
-def setup_logger(run_id: str) -> None:
+def setup_logger() -> None:
     """
     Configure logger using explicit config object.
-    Args:
-    run_id (str): Unique identifier for the current run, used in log formatting.
     """
+    assert config.runtime.RUN_ID is not None, "RUN_ID must be set in runtime before setting up logger."
+
     logger.remove()
 
     LOG_FORMAT = (
-        f"[{run_id}] "
+        f"[{config.runtime.RUN_ID}] "
         "<cyan>{time:YYYY-MM-DD HH:mm:ss}</cyan> | "
         "<level>{level}</level> | "
         "<cyan>{name}</cyan>:<cyan>{line}</cyan> - "

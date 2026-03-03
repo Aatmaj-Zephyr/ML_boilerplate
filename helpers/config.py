@@ -1,4 +1,7 @@
 """File to load config from config.toml and provide a global config object. No need to modify this file"""
+import petname
+
+import time
 import tomllib
 from types import SimpleNamespace
 
@@ -12,6 +15,13 @@ _config_dict = data.get("default", {}).copy()
 config = SimpleNamespace(**_config_dict)
 
 
+"""Globals to store runtime information like start time, run id, etc."""
+config.runtime = SimpleNamespace(
+    START_TIME=None,
+    RUN_ID=None,
+)
+
+
 def load_config(mode: str):
     """Load config with debug or prod mode.
 
@@ -19,6 +29,8 @@ def load_config(mode: str):
         mode (str): mode to load config for (debug/prod)
     """
 
+    config.runtime.RUN_ID = petname.generate(2)
+    config.runtime.START_TIME = time.time()
     mode_overrides = data.get(mode, {})
     _config_dict.update(mode_overrides)
 

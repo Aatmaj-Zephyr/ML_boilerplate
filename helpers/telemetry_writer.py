@@ -3,12 +3,13 @@
 import csv
 import os
 import time
-
+from helpers.config import config
 class TelemetryWriter:
-    def setup_writer(self, run_id:str, fieldnames:list, directory="./telemetry_logs"):
+    def setup_writer(self, fieldnames:list, directory="./telemetry_logs"):
+        assert config.runtime.RUN_ID is not None, "RUN_ID must be set in runtime before setting up telemetry writer."
         os.makedirs(directory, exist_ok=True)
 
-        self.filepath = os.path.join(directory, f"{run_id}.csv")
+        self.filepath = os.path.join(directory, f"{config.runtime.RUN_ID}.csv")
         file_exists = os.path.isfile(self.filepath)
 
         self.file = open(self.filepath, "a", newline="")
