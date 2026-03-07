@@ -14,6 +14,9 @@ def train() -> None:
     """Train the model."""
     log.debug('In the training function')
     for epoch in range(hyperparams.NUM_EPOCHS):
+
+
+
         if epoch % config.TELEMETRY_INTERVAL == 0:
             telemetry_writer.log(epoch=epoch, train_loss=0.5, val_loss=0.6)
             execution_time = time.time() - config.runtime.START_TIME
