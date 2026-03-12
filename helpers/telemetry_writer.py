@@ -1,28 +1,22 @@
 """File to setup a simple telemetry writer that logs metrics to a CSV file. No need to modify this file."""
-from typing import Any, TextIO
+from typing import Any
+from types import SimpleNamespace
 import csv
 import os
 import time
-
-from helpers.config import config
 
 
 class TelemetryWriter:
     """Class to write telemetry to some file."""
 
-    def __init__(self) -> None:
-        """Declare the attributes of the class."""
-        self.writer: csv.DictWriter
-        self.file: TextIO
-        self.filepath: str
-
-    def setup_writer(self, fieldnames: list[str], directory: str = "./telemetry_logs") -> None:
+    def __init__(self, fieldnames: list[str], directory: str, config: SimpleNamespace) -> None:
         """Set the writer attributes.
 
         Args:
             fieldnames (list): List of metric names to log (e.g. ["epoch", "train_loss", "val_loss"])
             directory (str, optional): Directory to store the log files. Defaults to "./telemetry_logs".
         """
+        self.config =config
         assert config.runtime.RUN_ID is not None, "RUN_ID must be set in runtime before setting up telemetry writer."
         os.makedirs(directory, exist_ok=True)
 
@@ -48,9 +42,6 @@ class TelemetryWriter:
         assert self.writer is not None, "TelemetryWriter not initialized. Call setup_writer first."
         metrics["timestamp"] = time.time()
         # add a formatted runtime metric to the logged metrics for better tracking of how long the training has been running
-        metrics["runtime"] = time.time()- config.runtime.START_TIME 
+        metrics["runtime"] = time.time() - self.config.runtime.START_TIME
         self.writer.writerow(metrics)
         self.file.flush()
-
-
-telemetry_writer = TelemetryWriter()

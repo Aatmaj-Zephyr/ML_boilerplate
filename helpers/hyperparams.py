@@ -2,7 +2,16 @@
 import tomllib
 from types import SimpleNamespace
 
-with open("./hyperparameters.toml", "rb") as f:
-    data = tomllib.load(f)
+def load_hyperparams(hyperparams_file: str) -> SimpleNamespace:
+    """Load hyperparameters from the toml file.
+    Args:
+        hyperparams_file (str): path to the hyperparameters file
+    Returns:
+        SimpleNamespace: hyperparams object
+    """
 
-hyperparams = SimpleNamespace(**data["default"])
+    with open(hyperparams_file, "rb") as f:
+        data = tomllib.load(f)
+
+    hyperparams = SimpleNamespace(**data["default"])
+    return hyperparams

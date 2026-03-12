@@ -1,15 +1,19 @@
 """Setup logger for the project. No need to modify this file."""
 import sys
+from types import SimpleNamespace
 from loguru import logger
+from logging import Logger
 
-from helpers.config import config
-
-log = logger.opt(colors=True)
-
-def setup_logger() -> None:
+def setup_logger(config: SimpleNamespace) -> Logger:
     """
     Configure logger using explicit config object.
+    Args:
+      config: Config object containing logging configuration.
+    Returns:
+      log: Configured logger instance.
     """
+    log = logger.opt(colors=True)
+
     assert config.runtime.RUN_ID is not None, "RUN_ID must be set in runtime before setting up logger."
 
     logger.remove()
@@ -41,4 +45,5 @@ def setup_logger() -> None:
         rotation="10 MB",
         colorize=False
     )
+    return log
     
