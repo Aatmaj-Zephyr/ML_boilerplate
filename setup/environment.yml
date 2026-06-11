@@ -1,0 +1,19 @@
+name: venv
+
+channels:
+- pytorch
+- conda-forge
+- defaults
+
+dependencies:
+- python=3.13
+- pytorch
+- torchvision
+- torchaudio
+- matplotlib
+- numpy
+- pip
+
+- pip:
+  - petname
+  - loguru

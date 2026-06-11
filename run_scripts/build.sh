@@ -2,9 +2,13 @@
 
 set -e
 
-echo "Activating virtual environment..."
-source venv/bin/activate
+echo "Activating Conda environment..."
 
+CONDA_BASE=$(conda info --base)
+# shellcheck disable=SC1091
+. "$CONDA_BASE/etc/profile.d/conda.sh"
+
+conda activate ./venv
 
 echo "Cleanings up old files"
 rm debug_logs/server.log || true

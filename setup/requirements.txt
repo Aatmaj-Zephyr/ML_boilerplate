@@ -1,6 +1,0 @@
-petname
-loguru
-
-torch
-matplotlib
-numpy

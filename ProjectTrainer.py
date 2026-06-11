@@ -24,7 +24,7 @@ class ProjectTrainer(TrainerBase):
 
     def train(self) -> None:
         """Implement your training logic here."""
-
+        # MODIFY THIS placeholder
         self.log.debug('In the training function')
         for epoch in range(self.hyperparams.NUM_EPOCHS):
 

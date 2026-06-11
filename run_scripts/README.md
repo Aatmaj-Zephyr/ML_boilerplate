@@ -1,0 +1,1 @@
+Run the `build.sh` file for production build and the `debug.sh` file for debugging. `server.sh` is meant to open telemetry server.
